@@ -1,10 +1,6 @@
 import { isValidBlogPost, BlogPost } from '../../entities/blogPost';
 import { Slug } from '../../value-objects/slug'; // Slugバリュー
 
-const createValidSlug = (value: string = 'test-blog-post'): Slug => {
-  return Slug.create(value); 
-};
-
 describe('BlogPost Entity Validation', () => {
   let validBlogPostData: BlogPost;
 

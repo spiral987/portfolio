@@ -80,7 +80,7 @@ export default async function HomePage() {
   return (
     <div style={{ maxWidth: '960px', margin: '0 auto', padding: '20px' }}>
       {/* 自己紹介セクション */}
-      <section style={{ textAlign: 'center', marginBottom: '40px', padding: '20px', background: '#f9f9f9', borderRadius: '10px' }}>
+      <section style={{ textAlign: 'center', marginBottom: '40px', padding: '20px', background: '#f9f9f9', borderRadius: '10px' , color: '#000000'}}>
         <h1 style={{ fontSize: '2.5em', marginBottom: '10px' }}>{name}のポートフォリオ</h1>
         <p style={{ fontSize: '1.1em', lineHeight: '1.6' }}>{bio}</p>
         <p style={{ marginTop: '20px', fontSize: '0.9em', color: '#888' }}>
