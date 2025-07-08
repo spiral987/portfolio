@@ -1,3 +1,4 @@
+/* eslint @typescript-eslint/no-explicit-any: 0 */
 // src/domain/__tests__/value-objects/image.test.ts
 
 import { Image } from '../../value-objects/image';
