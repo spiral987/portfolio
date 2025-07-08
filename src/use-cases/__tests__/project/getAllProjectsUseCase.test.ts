@@ -1,8 +1,8 @@
 import { IProjectRepository } from "@/infrastructure/repositories/projectRepository"
-import { GetAllProjectsUseCase } from "../project/getAllProjectsUseCase";
-import { Project } from "../../domain/entities/project";
-import { Image } from "../../domain/value-objects/image";
-import { Url } from "../../domain/value-objects/url";
+import { GetAllProjectsUseCase } from "../../project/getAllProjectsUseCase";
+import { Project } from "../../../domain/entities/project";
+import { Image } from "../../../domain/value-objects/image";
+import { Url } from "../../../domain/value-objects/url";
 
 describe('GetAllProjectsUseCase', () =>{
     let mockProjectRepository: jest.Mocked<IProjectRepository>;
