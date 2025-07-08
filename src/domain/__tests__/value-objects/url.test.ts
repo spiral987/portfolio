@@ -12,7 +12,7 @@ describe('Url Value Object', () => {
   // 無効なURLでエラーがスローされるかテスト
   test('should throw an error for an invalid URL', () => {
     const invalidUrl = 'invalid-url'; //Arrange(Act)
-    expect(() => Url.create(invalidUrl)).toThrow('Invalid URL format: invalid-url'); //Assert
+    expect(() => Url.create(invalidUrl)).toThrow('Invalid URL format or unsupported protocol: invalid-url'); //Assert
   });
 
   // httpプロトコルでも有効かテスト
@@ -25,7 +25,7 @@ describe('Url Value Object', () => {
   // ftpプロトコルなどの無効なプロトコルでエラーがスローされるかテスト
   test('should throw an error for unsupported protocols like ftp', () => {
     const ftpUrl = 'ftp://example.com/file';
-    expect(() => Url.create(ftpUrl)).toThrow('Invalid URL format: ftp://example.com/file');
+    expect(() => Url.create(ftpUrl)).toThrow('Invalid URL format or unsupported protocol: ftp://example.com/file');
   });
 
   // 同じ値のURLオブジェクトが等しいと判断されるかテスト
@@ -43,4 +43,17 @@ describe('Url Value Object', () => {
     const url = Url.create('https://mywebsite.com/about');
     expect(url.toString()).toBe('https://mywebsite.com/about');
   });
+
+  test('should return true for valid relative paths', () => {
+  expect(Url.isValid('/images/my-photo.jpg')).toBe(true);
+  expect(Url.isValid('/assets/styles.css')).toBe(true);
+  expect(Url.isValid('/api/data')).toBe(true);
+  });
+
+  test('should return false for invalid relative paths', () => {
+  expect(Url.isValid('/')).toBe(false); // /のみは簡易チェックでfalse
+  expect(Url.isValid('/../secret')).toBe(false); // パストラバーサル対策
+  expect(Url.isValid('/image//double-slash.jpg')).toBe(false); // 二重スラッシュ
+  });
+
 });

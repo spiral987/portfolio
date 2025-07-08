@@ -7,9 +7,9 @@
 export class Url {
   // `public readonly` で、外部から値にアクセスできるが変更できないようにします。
   private constructor(public readonly value: string) {
-    // インスタンス作成時にバリデーションを実行
     if (!Url.isValid(value)) {
-      throw new Error(`Invalid URL format: ${value}`);
+      // エラーメッセージを少し変え、ローカルパスも考慮に入れる
+      throw new Error(`Invalid URL format or unsupported protocol: ${value}`);
     }
   }
 
@@ -29,6 +29,14 @@ export class Url {
    * @returns 有効であれば true、そうでなければ false。
    */
   static isValid(url: string): boolean {
+    // まず、パスが '/' から始まる相対パスかどうかをチェック
+    if (url.startsWith('/')) {
+      // 相対パスの場合、基本的なファイルパスのルールに従っているかを確認
+      // ここでは簡易的に、空ではない、不正な文字を含まないなどを想定
+      // 必要であればより厳密な正規表現を追加
+      return url.length > 1 && !url.includes('..') && !url.includes('//'); // 簡易的な安全チェック
+    }
+
     try {
       new URL(url); // 無効なURLだとここでエラーが発生
       // 特定のプロトコル (http/https) のみを許可する場合

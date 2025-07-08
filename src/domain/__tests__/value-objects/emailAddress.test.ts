@@ -41,7 +41,7 @@ describe('Image Value Object', () => {
       altText: 'Some alt text',
     };
     // Url.create() がエラーをスローするため、Image.create() もエラーをスローする
-    expect(() => Image.create(invalidUrlData)).toThrow('Invalid URL format: invalid-url-format');
+    expect(() => Image.create(invalidUrlData)).toThrow('Invalid URL format or unsupported protocol: invalid-url-format');
   });
 
   // 同じ値のImageオブジェクトが等しいと判断されるかテスト
