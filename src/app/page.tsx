@@ -1,103 +1,125 @@
-import Image from "next/image";
+// src/app/page.tsx
 
-export default function Home() {
+// 必要なユースケースとリポジトリをインポート
+// Next.jsのServer Componentsから直接ユースケースを呼び出します
+import { GetFeaturedProjectsUseCase } from '@/use-cases/project/getFeaturedProjectsUseCase';
+import { GetLatestBlogPostsUseCase } from '@/use-cases/blogPost/getLatestBlogPostsUseCase';
+import { InMemoryProjectRepository } from '@/infrastructure/repositories/in-memory/inMemoryProjectRepository';
+import { InMemoryBlogPostRepository } from '@/infrastructure/repositories/in-memory/inMemoryBlogPostRepository';
+
+// ドメイン層のエンティティとバリューオブジェクト
+import { Project } from '@/domain/entities/project';
+import { BlogPost } from '@/domain/entities/blogPost';
+import { CONTACT_INFO } from '@/lib/constants'; // 連絡先情報（定数として定義した場合）
+
+// UI表示用のコンポーネントを想定（今は直接ここに記述しますが、後で分割します）
+
+// トップページに表示する作品カードコンポーネント (簡易版)
+const ProjectCard = ({ project }: { project: Project }) => (
+  <div style={{ border: '1px solid #ccc', padding: '16px', margin: '8px', borderRadius: '8px' }}>
+    <h3 style={{ margin: '0 0 8px 0' }}>{project.title}</h3>
+    {project.images.length > 0 && (
+      <img
+        src={project.images[0].url.value}
+        alt={project.images[0].altText}
+        style={{ width: '100%', height: '150px', objectFit: 'cover', borderRadius: '4px' }}
+      />
+    )}
+    <p style={{ fontSize: '0.9em', color: '#666' }}>{project.description}</p>
+    <div style={{ marginTop: '10px' }}>
+      {project.projectUrl && (
+        <a href={project.projectUrl.value} target="_blank" rel="noopener noreferrer" style={{ marginRight: '10px' }}>
+          プロジェクトを見る
+        </a>
+      )}
+      {project.githubUrl && (
+        <a href={project.githubUrl.value} target="_blank" rel="noopener noreferrer">
+          GitHub
+        </a>
+      )}
+    </div>
+  </div>
+);
+
+// トップページに表示するブログ記事カードコンポーネント (簡易版)
+const BlogPostCard = ({ post }: { post: BlogPost }) => (
+  <div style={{ border: '1px solid #ccc', padding: '16px', margin: '8px', borderRadius: '8px' }}>
+    <h3 style={{ margin: '0 0 8px 0' }}>{post.title}</h3>
+    <p style={{ fontSize: '0.85em', color: '#666' }}>
+      {post.content.substring(0, 100)}... {/* 記事の冒頭のみ表示 */}
+    </p>
+    <p style={{ fontSize: '0.75em', color: '#999', textAlign: 'right' }}>
+      {post.publishedAt.toLocaleDateString()}
+    </p>
+    <a href={`/blog/${post.slug.value}`} style={{ display: 'block', textAlign: 'right', marginTop: '10px' }}>
+      続きを読む
+    </a>
+  </div>
+);
+
+
+export default async function HomePage() {
+  // ★ Next.jsのServer Componentsの利点を活かし、直接データをフェッチ
+  // ここでインメモリリポジトリのインスタンスを作成
+  const projectRepository = new InMemoryProjectRepository();
+  const blogPostRepository = new InMemoryBlogPostRepository();
+
+  // ユースケースのインスタンスを作成し、リポジトリを注入
+  const getFeaturedProjectsUseCase = new GetFeaturedProjectsUseCase(projectRepository);
+  const getLatestBlogPostsUseCase = new GetLatestBlogPostsUseCase(blogPostRepository);
+
+  // ユースケースを実行してデータを取得
+  const featuredProjects = await getFeaturedProjectsUseCase.execute();
+  const latestBlogPosts = await getLatestBlogPostsUseCase.execute();
+
+  // 自己紹介のデータ (今はここに直接記述、後で別のファイルにまとめることも可能)
+  const name = "あなたの名前";
+  const bio = "こんにちは！私は[あなたの専門分野、例：Web開発者/イラストレーター]です。このポートフォリオサイトでは、私の[例：Webアプリケーション開発、デジタルイラストレーション]のスキルと情熱を表現した作品を紹介しています。新しい技術を学ぶこと、そして創造的な解決策を見つけることに喜びを感じています。ご興味を持っていただけたら、ぜひお問い合わせください！";
+
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div style={{ maxWidth: '960px', margin: '0 auto', padding: '20px' }}>
+      {/* 自己紹介セクション */}
+      <section style={{ textAlign: 'center', marginBottom: '40px', padding: '20px', background: '#f9f9f9', borderRadius: '10px' , color: '#000000'}}>
+        <h1 style={{ fontSize: '2.5em', marginBottom: '10px' }}>{name}のポートフォリオ</h1>
+        <p style={{ fontSize: '1.1em', lineHeight: '1.6' }}>{bio}</p>
+        <p style={{ marginTop: '20px', fontSize: '0.9em', color: '#888' }}>
+          メール: <a href={`mailto:${CONTACT_INFO.email.value}`}>{CONTACT_INFO.email.value}</a>
+        </p>
+        {CONTACT_INFO.githubUrl && (
+          <p style={{ fontSize: '0.9em', color: '#888' }}>
+            GitHub: <a href={CONTACT_INFO.githubUrl.value} target="_blank" rel="noopener noreferrer">{CONTACT_INFO.githubUrl.value}</a>
+          </p>
+        )}
+      </section>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* 注目作品セクション */}
+      <section style={{ marginBottom: '40px' }}>
+        <h2 style={{ fontSize: '2em', marginBottom: '20px', borderBottom: '2px solid #eee', paddingBottom: '10px' }}>注目作品</h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '20px' }}>
+          {featuredProjects.length > 0 ? (
+            featuredProjects.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))
+          ) : (
+            <p>まだ注目作品はありません。</p>
+          )}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </section>
+
+      {/* 最新ブログ記事セクション */}
+      <section>
+        <h2 style={{ fontSize: '2em', marginBottom: '20px', borderBottom: '2px solid #eee', paddingBottom: '10px' }}>最新のつぶやき</h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '20px' }}>
+          {latestBlogPosts.length > 0 ? (
+            latestBlogPosts.map((post) => (
+              <BlogPostCard key={post.id} post={post} />
+            ))
+          ) : (
+            <p>まだブログ記事はありません。</p>
+          )}
+        </div>
+      </section>
     </div>
   );
 }

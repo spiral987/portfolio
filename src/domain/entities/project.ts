@@ -17,12 +17,44 @@ export interface Project {
 }
 
 export function isValidProject(project: Project): boolean {
-  return project.title.trim() !== '' &&
-         project.description.trim() !== '' &&
-         project.images.length > 0 && // 少なくとも1つの画像が必要
-         project.images.every(img => Image.isValid({url:img.url.value, altText:img.altText})) && // 各画像が有効であること
-          // projectUrl が存在する場合は有効であること
-         (!project.projectUrl || Url.isValid(project.projectUrl.value)) && 
-         // githubUrl が存在する場合は有効であること
-         (!project.githubUrl || Url.isValid(project.githubUrl.value));
+// ★★★ここからデバッグログを追加★★★
+  console.log(`--- Validating Project: ${project.title} (${project.id}) ---`);
+
+  const isTitleValid = project.title.trim() !== '';
+  console.log(`Title valid: ${isTitleValid} (Value: "${project.title}")`);
+
+  const isDescriptionValid = project.description.trim() !== '';
+  console.log(`Description valid: ${isDescriptionValid} (Value: "${project.description}")`);
+
+  const areImagesPresent = project.images.length > 0;
+  console.log(`Images present: ${areImagesPresent} (Count: ${project.images.length})`);
+
+  const areAllImagesValid = project.images.every((img) => Image.isValid({ url: img.url.value, altText: img.altText }));
+  console.log(`All images valid: ${areAllImagesValid}`);
+  if (!areAllImagesValid) {
+    project.images.forEach((img, index) => {
+      console.log(`  Image ${index} (${img.url.value}) isValidImage: ${Image.isValid({ url: img.url.value, altText: img.altText })}`);
+    });
+  }
+
+  const isProjectUrlValid = !project.projectUrl || Url.isValid(project.projectUrl.value);
+  console.log(`Project URL valid: ${isProjectUrlValid} (Value: ${project.projectUrl?.value})`);
+  if (project.projectUrl && !Url.isValid(project.projectUrl.value)) {
+    console.log(`  Reason for invalid Project URL: Url.isValid('${project.projectUrl.value}') returned false.`);
+  }
+
+  const isGithubUrlValid = !project.githubUrl || Url.isValid(project.githubUrl.value);
+  console.log(`GitHub URL valid: ${isGithubUrlValid} (Value: ${project.githubUrl?.value})`);
+  if (project.githubUrl && !Url.isValid(project.githubUrl.value)) {
+    console.log(`  Reason for invalid GitHub URL: Url.isValid('${project.githubUrl.value}') returned false.`);
+  }
+  console.log(`--- End Validating Project: ${project.title} ---`);
+  // ★★★デバッグログここまで★★★
+
+  return isTitleValid &&
+         isDescriptionValid &&
+         areImagesPresent &&
+         areAllImagesValid &&
+         isProjectUrlValid &&
+         isGithubUrlValid;
 }
