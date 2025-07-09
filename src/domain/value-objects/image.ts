@@ -101,10 +101,10 @@ export class Image {
 
     // ★ここから画像形式のバリデーションロジックを追加
     const allowedExtensions = ['.jpg', '.jpeg', '.png'];
-    const url = new URL(image.url); // Url.isValidで有効性が保証されているため、ここでは安全にURLオブジェクトを生成
+    const url = Url.create(image.url); // Url.isValidで有効性が保証されているため、ここでは安全にURLオブジェクトを生成
 
     // URLのパスからファイル拡張子を取得
-    const path = url.pathname;
+    const path = url.value;
     const lastDotIndex = path.lastIndexOf('.');
     if (lastDotIndex === -1) {
       return false; // 拡張子がない場合は無効

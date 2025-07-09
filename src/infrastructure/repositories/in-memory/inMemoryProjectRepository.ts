@@ -13,8 +13,8 @@ const DUMMY_PROJECTS: Project[] = [
     description: 'Next.jsとクリーンアーキテクチャで構築した個人ポートフォリオサイトです。',
     fullDescription: 'このサイトは、私のスキルとプロジェクトを展示するためにNext.js (App Router), TypeScript, Tailwind CSS, クリーンアーキテクチャを用いて開発されました。',
     images: [
-      Image.create({ url: 'https://img.com/a.jpg', altText: 'ポートフォリオサイトのスクリーンショット1', type: 'screenshot', order: 1 }),
-      Image.create({ url: 'https://img.com/a.jpg', altText: 'ポートフォリオサイトのスクリーンショット2', type: 'screenshot', order: 2 }),
+      Image.create({ url: '/images/イラスト8-2.jpg', altText: 'ポートフォリオサイトのスクリーンショット1', type: 'screenshot', order: 1 }),
+      Image.create({ url: '/images/イラスト8-2.jpg', altText: 'ポートフォリオサイトのスクリーンショット2', type: 'screenshot', order: 2 }),
     ],
     techStack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Clean Architecture'],
     projectUrl: Url.create('https://my-actual-portfolio.com'),
@@ -29,7 +29,7 @@ const DUMMY_PROJECTS: Project[] = [
     description: 'シンプルなタスク管理Webアプリケーションです。',
     fullDescription: 'ユーザーがタスクを追加、編集、削除できるシンプルなCRUDアプリケーション。バックエンドにはFirebaseを使用。',
     images: [
-      Image.create({ url: 'https://img.com/a.jpg', altText: 'タスク管理アプリのスクリーンショット' }),
+      Image.create({ url: '/images/イラスト8-2.jpg', altText: 'タスク管理アプリのスクリーンショット' }),
     ],
     techStack: ['React', 'Firebase', 'CSS Modules'],
     projectUrl: null, // URLがない場合

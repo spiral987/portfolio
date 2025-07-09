@@ -12,6 +12,7 @@ import { Project } from '@/domain/entities/project';
 import { BlogPost } from '@/domain/entities/blogPost';
 import { CONTACT_INFO } from '@/lib/constants'; // 連絡先情報（定数として定義した場合）
 
+import Image from 'next/image';
 // UI表示用のコンポーネントを想定（今は直接ここに記述しますが、後で分割します）
 
 // トップページに表示する作品カードコンポーネント (簡易版)
@@ -19,9 +20,11 @@ const ProjectCard = ({ project }: { project: Project }) => (
   <div style={{ border: '1px solid #ccc', padding: '16px', margin: '8px', borderRadius: '8px' }}>
     <h3 style={{ margin: '0 0 8px 0' }}>{project.title}</h3>
     {project.images.length > 0 && (
-      <img
+      <Image
         src={project.images[0].url.value}
         alt={project.images[0].altText}
+        height={150}
+        width={300}
         style={{ width: '100%', height: '150px', objectFit: 'cover', borderRadius: '4px' }}
       />
     )}

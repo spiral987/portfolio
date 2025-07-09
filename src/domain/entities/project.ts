@@ -1,23 +1,24 @@
 // src/domain/entities/project.ts
+
 import { Image } from '../value-objects/image';
 import { Url } from '../value-objects/url';
 
 export interface Project {
-    id: string;
-    title: string;
-    description: string; // トップページ用の短い説明
-    fullDescription: string; // WORKSページ用の詳細な説明
-    images: Image[];
-    techStack: string[];
-    projectUrl: Url | null;
-    githubUrl: Url | null;
-    isFeatured: boolean; // トップページに表示するかどうか
-    createdAt: Date;
-    updatedAt: Date;
+  id: string;
+  title: string;
+  description: string;
+  fullDescription: string;
+  images: Image[];
+  techStack: string[];
+  projectUrl: Url | null;
+  githubUrl: Url | null;
+  isFeatured: boolean;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export function isValidProject(project: Project): boolean {
-// ★★★ここからデバッグログを追加★★★
+  // ★★★ここからデバッグログを追加★★★
   console.log(`--- Validating Project: ${project.title} (${project.id}) ---`);
 
   const isTitleValid = project.title.trim() !== '';
@@ -29,11 +30,11 @@ export function isValidProject(project: Project): boolean {
   const areImagesPresent = project.images.length > 0;
   console.log(`Images present: ${areImagesPresent} (Count: ${project.images.length})`);
 
-  const areAllImagesValid = project.images.every((img) => Image.isValid({ url: img.url.value, altText: img.altText }));
+  const areAllImagesValid = project.images.every(img => Image.isValid({ url: img.url.value, altText: img.altText }));
   console.log(`All images valid: ${areAllImagesValid}`);
   if (!areAllImagesValid) {
     project.images.forEach((img, index) => {
-      console.log(`  Image ${index} (${img.url.value}) isValidImage: ${Image.isValid({ url: img.url.value, altText: img.altText })}`);
+      console.log(`  Image ${index} (${img.url.value}) isValid: ${Image.isValid({ url: img.url.value, altText: img.altText })}`);
     });
   }
 
