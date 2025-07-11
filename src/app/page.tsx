@@ -2,7 +2,8 @@
 
 import { GetFeaturedProjectsUseCase } from '@/use-cases/project/getFeaturedProjectsUseCase';
 import { GetLatestBlogPostsUseCase } from '@/use-cases/blogPost/getLatestBlogPostsUseCase';
-import { InMemoryProjectRepository } from '@/infrastructure/repositories/in-memory/inMemoryProjectRepository';
+//import { InMemoryProjectRepository } from '@/infrastructure/repositories/in-memory/inMemoryProjectRepository';
+import { FileSystemProjectRepository } from '@/infrastructure/repositories/file-system/fileSystemProjectRepository';
 import { InMemoryBlogPostRepository } from '@/infrastructure/repositories/in-memory/inMemoryBlogPostRepository';
 import { CONTACT_INFO } from '@/lib/constants';
 
@@ -11,7 +12,8 @@ import { ProjectCard } from '@/app/components/ProjectCard';
 import { BlogPostCard } from '@/app/components/BlogPostCard';
 
 export default async function HomePage() {
-  const projectRepository = new InMemoryProjectRepository();
+  //const projectRepository = new InMemoryProjectRepository();
+  const projectRepository = new FileSystemProjectRepository();
   const blogPostRepository = new InMemoryBlogPostRepository();
 
   const getFeaturedProjectsUseCase = new GetFeaturedProjectsUseCase(projectRepository);

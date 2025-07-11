@@ -1,59 +1,29 @@
 // src/app/projects/page.tsx
 
+// import { InMemoryProjectRepository } from '@/infrastructure/repositories/in-memory/inMemoryProjectRepository'; // 古い方をコメントアウト
+import { FileSystemProjectRepository } from '@/infrastructure/repositories/file-system/fileSystemProjectRepository'; // 新しい方をインポート
 import { GetAllProjectsUseCase } from '@/use-cases/project/getAllProjectsUseCase';
-import { InMemoryProjectRepository } from '@/infrastructure/repositories/in-memory/inMemoryProjectRepository';
-import { Project } from '@/domain/entities/project';
-import Image from 'next/image';
-
-// 作品カードコンポーネント (ホームページのものとほぼ同じですが、こちらに再定義します)
-const ProjectCard = ({ project }: { project: Project }) => (
-  <div style={{ border: '1px solid #ccc', padding: '16px', margin: '8px', borderRadius: '8px' }}>
-    <h3 style={{ margin: '0 0 8px 0' }}>{project.title}</h3>
-    {project.images.length > 0 && (
-      <Image
-        src={project.images[0].url.value}
-        alt={project.images[0].altText}
-        height={150}
-        width={300}
-        style={{ width: '100%', height: '150px', objectFit: 'cover', borderRadius: '4px' }}
-      />
-    )}
-    <p style={{ fontSize: '0.9em', color: '#666' }}>{project.description}</p>
-    <div style={{ marginTop: '10px' }}>
-      {project.projectUrl && (
-        <a href={project.projectUrl.value} target="_blank" rel="noopener noreferrer" style={{ marginRight: '10px' }}>
-          プロジェクトを見る
-        </a>
-      )}
-      {project.githubUrl && (
-        <a href={project.githubUrl.value} target="_blank" rel="noopener noreferrer">
-          GitHub
-        </a>
-      )}
-    </div>
-  </div>
-);
+import { ProjectCard } from '@/app/components/ProjectCard';
 
 export default async function ProjectsPage() {
-  // リポジトリとユースケースのインスタンスを作成
-  const projectRepository = new InMemoryProjectRepository();
+  // リポジトリのインスタンスを新しいものに差し替える
+  const projectRepository = new FileSystemProjectRepository();
   const getAllProjectsUseCase = new GetAllProjectsUseCase(projectRepository);
 
-  // すべてのプロジェクトを取得
   const allProjects = await getAllProjectsUseCase.execute();
 
   return (
-    <div style={{ maxWidth: '960px', margin: '0 auto', padding: '20px' }}>
-      <h1 style={{ fontSize: '2.5em', marginBottom: '20px', borderBottom: '2px solid #eee', paddingBottom: '10px' }}>
+    <div className="max-w-6xl mx-auto">
+      <h1 className="text-3xl font-bold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700">
         Projects
       </h1>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '20px' }}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {allProjects.length > 0 ? (
           allProjects.map((project) => (
             <ProjectCard key={project.id} project={project} />
           ))
         ) : (
-          <p>まだ作品はありません。</p>
+          <p className="text-gray-500">まだ作品はありません。</p>
         )}
       </div>
     </div>
