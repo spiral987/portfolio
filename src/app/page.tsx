@@ -5,7 +5,7 @@ import { GetContactInfoUseCase } from '@/use-cases/contact/getContactInfoUseCase
 import { GetLatestBlogPostsUseCase } from '@/use-cases/blogPost/getLatestBlogPostsUseCase';
 import { FileSystemProjectRepository } from '@/infrastructure/repositories/file-system/fileSystemProjectRepository';
 import { FileSystemContactRepository } from '@/infrastructure/repositories/file-system/fileSystemContactRepository';
-import { InMemoryBlogPostRepository } from '@/infrastructure/repositories/in-memory/inMemoryBlogPostRepository';
+import { FileSystemBlogPostRepository } from '@/infrastructure/repositories/file-system/fileSystemBlogPostRepository';
 
 // 作成したコンポーネントをインポート
 import { ProjectCard } from '@/app/components/ProjectCard';
@@ -13,7 +13,7 @@ import { BlogPostCard } from '@/app/components/BlogPostCard';
 
 export default async function HomePage() {
   const projectRepository = new FileSystemProjectRepository();
-  const blogPostRepository = new InMemoryBlogPostRepository();
+  const blogPostRepository = new FileSystemBlogPostRepository();
   const contactRepository = new FileSystemContactRepository();
 
   const getFeaturedProjectsUseCase = new GetFeaturedProjectsUseCase(projectRepository);
