@@ -6,7 +6,6 @@ import { GetAllProjectsUseCase } from '@/use-cases/project/getAllProjectsUseCase
 import { ProjectCard } from '@/app/components/ProjectCard';
 
 export default async function ProjectsPage() {
-  // リポジトリのインスタンスを新しいものに差し替える
   const projectRepository = new FileSystemProjectRepository();
   const getAllProjectsUseCase = new GetAllProjectsUseCase(projectRepository);
 

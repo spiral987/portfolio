@@ -1,12 +1,12 @@
 // src/app/illustrations/page.tsx
 
 import { GetAllIllustrationsUseCase } from '@/use-cases/illustration/getAllIllustrationsUseCase';
-import { InMemoryIllustrationRepository } from '@/infrastructure/repositories/in-memory/inMemoryIllustrationRepository';
+import { FileSystemIllustrationRepository } from '@/infrastructure/repositories/file-system/fileSystemIllustrationRepository';
 import { IllustrationCard } from '@/app/components/IllustrationCard'; // 作成したコンポーネントをインポート
 
 export default async function IllustrationsPage() {
   // リポジトリとユースケースのインスタンスを作成
-  const illustrationRepository = new InMemoryIllustrationRepository();
+  const illustrationRepository = new FileSystemIllustrationRepository();
   const getAllIllustrationsUseCase = new GetAllIllustrationsUseCase(illustrationRepository);
 
   // すべてのイラストを取得
