@@ -58,6 +58,7 @@ export class FileSystemBlogPostRepository implements IBlogPostRepository {
   }
 
   async getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
+    console.log(`Fetching blog post with slug: ${slug}`);
     const filePath = path.join(blogDirectory, `${slug}.md`);
     
     try {
@@ -70,6 +71,7 @@ export class FileSystemBlogPostRepository implements IBlogPostRepository {
       // 下書きの場合は null を返す
       return post.isDraft ? null : post;
     } catch {
+        console.error(`Blog post with slug "${slug}" not found.`);
       // ファイルが見つからない場合はnullを返す
       return null;
     }
