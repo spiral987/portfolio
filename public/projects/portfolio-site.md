@@ -3,7 +3,7 @@ id: '5'
 title: 'ポートフォリオサイト'
 description: 'Next.jsとクリーンアーキテクチャで構築した個人ポートフォリオサイトです。'
 images:
-  - url: '/images/project_image1.png'
+  - url: '/images/projects/portfolio_image1.png'
     altText: 'ポートフォリオサイトのスクリーンショット1'
 techStack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS']
 projectUrl: 'https://portfolio-spiral987-c31cbce1.vercel.app/'
