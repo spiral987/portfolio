@@ -31,19 +31,6 @@ const DUMMY_ILLUSTRATIONS: Illustration[] = [
     createdAt: new Date('2024-04-10T10:00:00Z'),
     updatedAt: new Date('2024-04-10T10:00:00Z'),
   },
-  {
-    id: 'illus-3',
-    title: 'キャラクターデザイン：魔法使い',
-    description: '新しいゲームのためのキャラクターデザイン案です。',
-    fullDescription: '可愛らしさと神秘的な雰囲気を両立させることを目指しました。',
-    images: [
-      Image.create({ url: 'https://via.placeholder.com/500x700/3357FF/FFFFFF?text=Mage+Design+1', altText: '魔法使いのデザイン1', type: 'full', order: 1 }),
-      Image.create({ url: 'https://via.placeholder.com/400x560/5733FF/FFFFFF?text=Mage+Design+2 (表情差分)', altText: '魔法使いのデザイン2', type: 'process', order: 2 }),
-    ],
-    isFeatured: true, // トップページに表示する注目イラスト
-    createdAt: new Date('2024-06-05T15:00:00Z'),
-    updatedAt: new Date('2024-06-05T15:00:00Z'),
-  },
 ];
 
 /**
