@@ -3,7 +3,7 @@ id: '1'
 title: 'ポートフォリオサイト'
 description: 'Next.jsとクリーンアーキテクチャで構築した個人ポートフォリオサイトです。'
 images:
-  - url: '/images/portfolio-image1.png'
+  - url: '/images/project_image1.png'
     altText: 'ポートフォリオサイトのスクリーンショット1'
     type: 'screenshot'
     order: 1
