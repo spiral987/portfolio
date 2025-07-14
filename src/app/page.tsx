@@ -1,26 +1,28 @@
 // src/app/page.tsx
 
 import { GetFeaturedProjectsUseCase } from '@/use-cases/project/getFeaturedProjectsUseCase';
+import { GetContactInfoUseCase } from '@/use-cases/contact/getContactInfoUseCase';
 import { GetLatestBlogPostsUseCase } from '@/use-cases/blogPost/getLatestBlogPostsUseCase';
-//import { InMemoryProjectRepository } from '@/infrastructure/repositories/in-memory/inMemoryProjectRepository';
 import { FileSystemProjectRepository } from '@/infrastructure/repositories/file-system/fileSystemProjectRepository';
+import { FileSystemContactRepository } from '@/infrastructure/repositories/file-system/fileSystemContactRepository';
 import { InMemoryBlogPostRepository } from '@/infrastructure/repositories/in-memory/inMemoryBlogPostRepository';
-import { CONTACT_INFO } from '@/lib/constants';
 
 // 作成したコンポーネントをインポート
 import { ProjectCard } from '@/app/components/ProjectCard';
 import { BlogPostCard } from '@/app/components/BlogPostCard';
 
 export default async function HomePage() {
-  //const projectRepository = new InMemoryProjectRepository();
   const projectRepository = new FileSystemProjectRepository();
   const blogPostRepository = new InMemoryBlogPostRepository();
+  const contactRepository = new FileSystemContactRepository();
 
   const getFeaturedProjectsUseCase = new GetFeaturedProjectsUseCase(projectRepository);
   const getLatestBlogPostsUseCase = new GetLatestBlogPostsUseCase(blogPostRepository);
+  const getContactInfoUseCase = new GetContactInfoUseCase(contactRepository);
 
   const featuredProjects = await getFeaturedProjectsUseCase.execute();
   const latestBlogPosts = await getLatestBlogPostsUseCase.execute(3); // 最新3件に
+  const contactInfo = await getContactInfoUseCase.execute();
 
   // 自己紹介文を更新
   const bio = "Spiral987のサイトへようこそ。私は、ソフトウェアエンジニアであり、イラストレーターです。ここでは、私の注目作品や最新のブログ記事を紹介しています。";
@@ -32,11 +34,11 @@ export default async function HomePage() {
       <section className="text-center my-12 p-8 bg-gray-50 dark:bg-gray-800 rounded-xl">
         <p className="text-lg leading-relaxed text-gray-800 dark:text-gray-200">{bio}</p>
         <div className="mt-6 flex justify-center items-center gap-6 text-sm text-gray-500 dark:text-gray-400">
-          <a href={`mailto:${CONTACT_INFO.email.value}`} className="hover:text-blue-500 dark:hover:text-blue-400">
-            {CONTACT_INFO.email.value}
+          <a href={`mailto:${contactInfo.email.value}`} className="hover:text-blue-500 dark:hover:text-blue-400">
+            {contactInfo.email.value}
           </a>
-          {CONTACT_INFO.githubUrl && (
-            <a href={CONTACT_INFO.githubUrl.value} target="_blank" rel="noopener noreferrer" className="hover:text-gray-800 dark:hover:text-gray-200">
+          {contactInfo.githubUrl && (
+            <a href={contactInfo.githubUrl.value} target="_blank" rel="noopener noreferrer" className="hover:text-gray-800 dark:hover:text-gray-200">
               GitHub
             </a>
           )}
