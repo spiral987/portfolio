@@ -3,6 +3,19 @@
 import { GetBlogPostBySlugUseCase } from '@/use-cases/blogPost/getBlogPostBySlugUseCase';
 import { FileSystemBlogPostRepository } from '@/infrastructure/repositories/file-system/fileSystemBlogPostRepository';
 import { notFound } from 'next/navigation';
+import { GetAllBlogPostsUseCase } from '@/use-cases/blogPost/getAllBlogPostsUseCase';
+
+
+export async function generateStaticParams() {
+  const blogPostRepository = new FileSystemBlogPostRepository();
+  const getAllBlogPostsUseCase = new GetAllBlogPostsUseCase(blogPostRepository);
+  const posts = await getAllBlogPostsUseCase.execute();
+
+  // 各記事のスラッグをパラメータとして返す
+  return posts.map((post) => ({
+    slug: post.slug.value,
+  }));
+}
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
