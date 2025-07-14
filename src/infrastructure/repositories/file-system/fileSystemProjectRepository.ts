@@ -10,6 +10,25 @@ import matter from 'gray-matter';
 import { remark } from 'remark';
 import html from 'remark-html';
 
+// Markdownのフロントマターから読み込むデータの型を定義
+type ProjectFrontmatter = {
+  id: string;
+  title: string;
+  description: string;
+  images: {
+    url: string;
+    altText: string;
+    type?: 'thumbnail' | 'full' | 'process' | 'screenshot';
+    order?: number;
+  }[];
+  techStack: string[];
+  projectUrl?: string | null;
+  githubUrl?: string | null;
+  isFeatured: boolean;
+  createdAt: string;
+  updatedAt: string;
+};
+
 const projectsDirectory = path.join(process.cwd(), 'public/projects');
 
 export class FileSystemProjectRepository implements IProjectRepository {
@@ -19,13 +38,13 @@ export class FileSystemProjectRepository implements IProjectRepository {
     return processedContent.toString();
   }
   
-  private mapDataToProject(data: any, contentHtml: string): Project {
+  private mapDataToProject(data: ProjectFrontmatter, contentHtml: string): Project {
     return {
       id: data.id,
       title: data.title,
       description: data.description,
       fullDescription: contentHtml, // Markdownの本文をHTMLとしてセット
-      images: data.images.map((img: any) => Image.create(img)),
+      images: data.images.map((img) => Image.create(img)),
       techStack: data.techStack,
       projectUrl: data.projectUrl ? Url.create(data.projectUrl) : null,
       githubUrl: data.githubUrl ? Url.create(data.githubUrl) : null,
@@ -42,7 +61,7 @@ export class FileSystemProjectRepository implements IProjectRepository {
       const fileContents = fs.readFileSync(fullPath, 'utf8');
       const matterResult = matter(fileContents);
       const contentHtml = await this.processMarkdown(matterResult.content);
-      return this.mapDataToProject(matterResult.data, contentHtml);
+      return this.mapDataToProject(matterResult.data as ProjectFrontmatter, contentHtml);
     }));
     
     return allProjectsData.sort((a, b) => {
