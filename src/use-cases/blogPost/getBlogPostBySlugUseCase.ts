@@ -19,6 +19,7 @@ export class GetBlogPostBySlugUseCase {
    * @returns 指定されたスラッグのBlogPostエンティティ、または見つからない場合はnullを解決するPromise。
    */
   async execute(slug: string): Promise<BlogPost | null> {
+    console.log(`Executing GetBlogPostBySlugUseCase for slug: ${slug}`);
     const post = await this.blogPostRepository.getBlogPostBySlug(slug);
 
     // 必要であれば、ここで記事が公開済みであるか、ユーザーに閲覧権限があるかなどの追加チェックを実装できます。

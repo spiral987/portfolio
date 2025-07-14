@@ -1,20 +1,14 @@
 ---
-id: '1'
+id: '5'
 title: 'ポートフォリオサイト'
 description: 'Next.jsとクリーンアーキテクチャで構築した個人ポートフォリオサイトです。'
 images:
-  - url: '/images/portfolio-image1.png'
+  - url: '/images/projects/portfolio_image1.png'
     altText: 'ポートフォリオサイトのスクリーンショット1'
-    type: 'screenshot'
-    order: 1
-  - url: '/images/イラスト8-2.jpg'
-    altText: 'ポートフォリオサイトのスクリーンショット2'
-    type: 'screenshot'
-    order: 2
-techStack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Clean Architecture']
+techStack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS']
 projectUrl: 'https://portfolio-spiral987-c31cbce1.vercel.app/'
 githubUrl: 'https://github.com/spiral987/portfolio'
-isFeatured: true
+isFeatured: false
 createdAt: '2025-07-04T00:00:00Z'
 updatedAt: '2024-07-11T00:00:00Z'
 ---
