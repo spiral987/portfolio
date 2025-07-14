@@ -101,17 +101,22 @@ export class Image {
 
     // ★ここから画像形式のバリデーションロジックを追加
     const allowedExtensions = ['.jpg', '.jpeg', '.png'];
-    const url = Url.create(image.url); // Url.isValidで有効性が保証されているため、ここでは安全にURLオブジェクトを生成
+    try{
 
-    // URLのパスからファイル拡張子を取得
-    const path = url.value;
-    const lastDotIndex = path.lastIndexOf('.');
-    if (lastDotIndex === -1) {
-      return false; // 拡張子がない場合は無効
-    }
-    const extension = path.substring(lastDotIndex).toLowerCase(); // 小文字に変換
+      const pathname = new URL(image.url, 'http://example.com').pathname; // URLのパスを取得
+      const lastDotIndex = pathname.lastIndexOf('.');
+      if(lastDotIndex === -1) {
+        return false; // 拡張子がない場合は無効
+      }
+    
+
+    const extension = pathname.substring(lastDotIndex).toLowerCase(); // 小文字に変換
+
 
     // 許可された拡張子に含まれるかチェック
     return allowedExtensions.includes(extension);
+    }catch{
+      return false;
+    }
   }
 }
