@@ -31,14 +31,15 @@ export default async function HomePage() {
   const latestBlogPosts = await getLatestBlogPostsUseCase.execute(3); // 最新3件に
   const contactInfo = await getContactInfoUseCase.execute();
 
-  // 自己紹介文を更新
-  const bio = "Spiral987のサイトへようこそ。私は、ソフトウェアエンジニアであり、イラストレーターです。ここでは、私の注目作品や最新のブログ記事を紹介しています。";
+  const bio = "spiralです。大学では情報学・ヒューマンコンピュータインタラクションを専攻し、個人ではアプリケーション制作やイラスト制作を行っています。ここには私の作品やブログ記事、連絡先情報などが掲載されています。";
 
   return (
-    // Tailwind CSSのクラスを適用
     <div className="max-w-4xl mx-auto">
-      {/* 自己紹介セクション */}
-      <section className="text-center my-12 p-8 bg-gray-50 dark:bg-gray-800 rounded-xl">
+      <h1 className ="text-4xl font-black tracking-wider mb-8 text-center">
+        spiral&#39;s Portfolio
+      </h1>
+
+      <section className="text-center my-12 p-8 rounded-xl">
         <p className="text-lg leading-relaxed text-gray-800 dark:text-gray-200">{bio}</p>
         <div className="mt-6 flex justify-center items-center gap-6 text-sm text-gray-500 dark:text-gray-400">
           <a href={`mailto:${contactInfo.email.value}`} className="hover:text-blue-500 dark:hover:text-blue-400">

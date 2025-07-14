@@ -5,7 +5,7 @@ import Link from 'next/link';
 export const ProjectCard = ({ project }: { project: Project }) => (
   <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 bg-white dark:bg-gray-800">
     {project.images.length > 0 && (
-      <Link href="#"> {/*TODO: プロジェクト詳細ページへのリンクを追加 */}
+      <Link href={`/projects/${project.id}`} className="block border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 bg-white dark:bg-gray-800">
           <Image
             src={project.images[0].url.value}
             alt={project.images[0].altText}
