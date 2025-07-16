@@ -4,7 +4,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 
-// ハンバーガーメニューのアイコン（仮）
+// ハンバーガーメニューのアイコン
 const HamburgerIcon = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -31,7 +31,7 @@ export const Header = () => {
     <header className="header">
       <div className="header-container">
         <Link href="/" className="logo">
-          My Portfolio
+          Portfolio
         </Link>
 
         {/* ハンバーガーメニューボタン (モバイル用) */}
