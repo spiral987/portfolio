@@ -8,6 +8,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import { remark } from 'remark';
 import html from 'remark-html';
+import gfm from 'remark-gfm';
 
 type BlogPostFrontmatter = {
   id: string;
@@ -24,7 +25,7 @@ const blogDirectory = path.join(process.cwd(), 'public/blog');
 export class FileSystemBlogPostRepository implements IBlogPostRepository {
 
   private async processMarkdown(content: string): Promise<string> {
-    const processedContent = await remark().use(html).process(content);
+    const processedContent = await remark().use(gfm).use(html).process(content);
     return processedContent.toString();
   }
 

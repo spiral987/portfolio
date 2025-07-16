@@ -55,13 +55,23 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
 
       {/* 日付と外部リンク */}
       <div className="flex justify-between items-center mb-8 text-sm text-gray-500 dark:text-gray-400">
-        <time dateTime={project.createdAt.toISOString()}>
-          {project.createdAt.toLocaleDateString('ja-JP', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          })}
-        </time>
+        <div className="flex gap-x-4">
+          <p className="text-gray-600 dark:text-gray-300">
+            作成日: {project.createdAt.toLocaleDateString('ja-JP', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            })}
+          </p>
+          
+          <p className="text-gray-600 dark:text-gray-300">
+            更新日: {project.updatedAt.toLocaleDateString('ja-JP', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            })}
+          </p>
+        </div>
         <div className="flex gap-4">
           {project.projectUrl && (
             <a href={project.projectUrl.value} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">

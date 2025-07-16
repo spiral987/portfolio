@@ -35,7 +35,7 @@ const projectsDirectory = path.join(process.cwd(), 'public/projects');
 export class FileSystemProjectRepository implements IProjectRepository {
   
   private async processMarkdown(content: string): Promise<string> {
-    const processedContent = await remark().use(gfm).use(html, {sanitize: false}).process(content);
+    const processedContent = await remark().use(gfm).use(html).process(content);
     return processedContent.toString();
   }
   
