@@ -1,6 +1,6 @@
 ---
 id: '1'
-title: 'VRデッサン人形操作プロジェクト'
+title: '学士論文'
 description: 'VR環境でデッサン人形を操作する時の手法を評価しました'
 techStack: ['Unity', 'C#', 'R']
 githubUrl: 'https://github.com/spiral987/VR_thesis_task'

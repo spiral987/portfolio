@@ -32,34 +32,3 @@ updatedAt: '2024-07-16T00:00:00Z'
 * SSRとSSGの違いを理解。今回はまだページが少ないので静的生成で落ち着いた。
 * Git Rebaseを初めてやってみた。コミット履歴が繋がってなかったからrebaseで履歴ごと改ざんした、というイメージでやったけど違うかもしれない。
 * Geminiは最新の情報を知らないので、エラーを吐いたらとりあえず使用しているものの最新の使い方を調べておくといい。
-
-
-## 🙌↓使えるMarkdownの記法↓
-
-# GFM
-
-Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni, nemo!
-
-## Autolink literals
-
-www.example.com, https://example.com, and contact@example.com.
-
-## Footnote
-
-A note[^2]
-
-[^2]: Big note.
-
-## Strikethrough
-
-~one~ or ~~two~~ tildes.
-
-## Table
-
-| a | b  |  c |  d  |
-| - | :- | -: | :-: |
-
-## Tasklist
-
-* [ ] to do
-* [x] done
