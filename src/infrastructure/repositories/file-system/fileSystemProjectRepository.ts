@@ -8,8 +8,9 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { remark } from 'remark';
-import html from 'remark-html';
-import gfm from 'remark-gfm'; 
+import remarkGfm from 'remark-gfm'; 
+import remarkRehype from 'remark-rehype';
+import rehypeStringify from 'rehype-stringify';
 
 // Markdownのフロントマターから読み込むデータの型を定義
 type ProjectFrontmatter = {
@@ -35,7 +36,14 @@ const projectsDirectory = path.join(process.cwd(), 'public/projects');
 export class FileSystemProjectRepository implements IProjectRepository {
   
   private async processMarkdown(content: string): Promise<string> {
-    const processedContent = await remark().use(gfm).use(html).process(content);
+    const processedContent = await remark()
+      .use(remarkGfm) // GFMを有効にする
+      .use(remarkRehype, {
+        footnoteLabel: '注釈',
+        footnoteBackLabel: '戻る'
+      }) // mdast  -> hast
+      .use(rehypeStringify) // hast -> HTML
+      .process(content);
     return processedContent.toString();
   }
   
