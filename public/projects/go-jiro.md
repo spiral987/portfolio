@@ -2,7 +2,7 @@
 id: '3'
 title: 'Go-Jiro'
 description: '二郎系ラーメンの敷居を下げるwebサイトを作りました'
-techStack: ['Next.js', 'Tailwind CSS', 'Node.js', 'PostgreSQL', 'Prisma', 'Render', 'Docker']
+techStack: ['Next.js', 'Tailwind CSS', 'Node.js', 'PostgreSQL', 'Prisma', 'Render', 'Docker', 'Express', 'Google Places API']
 projectUrl: 'https://go-jiro-frontend.onrender.com/'
 githubUrl: 'https://github.com/geek-hackathon2025-vol5-team-hci/go-jiro'
 isFeatured: false

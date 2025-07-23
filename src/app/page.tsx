@@ -31,7 +31,7 @@ export default async function HomePage() {
   const latestBlogPosts = await getLatestBlogPostsUseCase.execute(3); // 最新3件に
   const contactInfo = await getContactInfoUseCase.execute();
 
-  const bio = "spiralです。大学では情報学・ヒューマンコンピュータインタラクションを専攻し、個人ではアプリケーション制作やイラスト制作を行っています。ここには私の作品やブログ記事、連絡先情報などが掲載されています。";
+  const bio = "spiralです。情報科学を専攻、ヒューマンコンピュータインタラクションを研究分野とし、個人ではアプリケーション制作やイラスト制作を行っています。ここには私の作品やブログ記事、連絡先情報などが掲載されています。";
 
   return (
     <div className="max-w-4xl mx-auto">

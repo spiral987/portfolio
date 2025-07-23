@@ -5,6 +5,34 @@ import { GetAllProjectsUseCase } from '@/use-cases/project/getAllProjectsUseCase
 import { GetProjectByIdUseCase } from '@/use-cases/project/getProjectByIdUseCase';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
+import {
+  FaReact,
+  FaUnity,
+  FaNodeJs,
+  FaDocker,
+  FaGithub,
+  FaJs,
+  FaHtml5,
+  FaCss3Alt,
+} from 'react-icons/fa';
+import {
+  SiNextdotjs,
+  SiTypescript,
+  SiTailwindcss,
+  SiPostgresql,
+  SiPrisma,
+  SiR,
+  SiVercel,
+  SiCplusplus,
+  SiCmake,
+  SiRender,
+  SiExpress,
+  SiGooglemaps,
+  SiGooglegemini,
+} from 'react-icons/si';
+import{
+  TbBrandCSharp,
+} from 'react-icons/tb'
 
 // ビルド時に静的なパスを生成する
 export async function generateStaticParams() {
@@ -17,6 +45,35 @@ export async function generateStaticParams() {
     id: project.id,
   }));
 }
+
+// 技術スタック名とアイコンコンポーネントのマッピング
+const techIconMap: { [key: string]: React.ElementType } = {
+  'Next.js': SiNextdotjs,
+  React: FaReact,
+  TypeScript: SiTypescript,
+  'Tailwind CSS': SiTailwindcss,
+  'Node.js': FaNodeJs,
+  PostgreSQL: SiPostgresql,
+  Prisma: SiPrisma,
+  Docker: FaDocker,
+  Unity: FaUnity,
+  R: SiR,
+  'C++': SiCplusplus,
+  Gemini: SiGooglegemini,
+  Vercel: SiVercel,
+  'HTML5': FaHtml5,
+  'CSS Modules': FaCss3Alt,
+  'Tailwind': SiTailwindcss,
+  'Github': FaGithub,
+  'JavaScript': FaJs,
+  CMake: SiCmake,
+  Render: SiRender,
+  Express: SiExpress,
+  'Google Places API': SiGooglemaps,
+  'C#': TbBrandCSharp,
+};
+
+
 
 export default async function ProjectDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -90,11 +147,20 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
       <div className="mb-8">
         <h2 className="text-xl font-bold mb-3">使用技術</h2>
         <div className="flex flex-wrap gap-2">
-          {project.techStack.map((tech) => (
-            <span key={tech} className="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs font-semibold px-2.5 py-0.5 rounded-full">
-              {tech}
-            </span>
-          ))}
+          {project.techStack.map((tech) => {
+            const Icon = techIconMap[tech];
+            return(
+              <div key={tech} className="flex flex-col items-center justify-start p-2 rounded-lg w-24 h-24">
+                {Icon ? (
+                  <Icon className="text-4xl mb-2 text-gray-700 dark:text-gray-300" />
+                ) : (
+                  // アイコンがない場合のプレースホルダー
+                  <div className="w-10 h-10 mb-2" />
+                )}
+                <span className="text-xs text-gray-800 dark:text-gray-200">{tech}</span>
+              </div>
+            );
+          })}
         </div>
       </div>
 
