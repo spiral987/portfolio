@@ -56,7 +56,7 @@ export default async function HomePage() {
       {/* 注目作品セクション */}
       <section className="mb-16">
         <h2 className="text-3xl font-bold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700">
-          注目作品
+          Featured
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {featuredProjects.length + featuredIllustrations.length> 0 ? (
@@ -77,7 +77,7 @@ export default async function HomePage() {
       {/* 最新ブログ記事セクション */}
       <section>
         <h2 className="text-3xl font-bold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700">
-          最新のつぶやき
+          Posts
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {latestBlogPosts.length > 0 ? (
