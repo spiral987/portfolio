@@ -21,10 +21,6 @@
   }
 }
 
-html, body {
-  cursor: url('../../public/cursor.png'), auto;
-}
-
 
 body {
   background: var(--background);
