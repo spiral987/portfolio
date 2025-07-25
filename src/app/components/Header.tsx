@@ -3,6 +3,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { ThemeToggle } from './ThemeToggle';
 
 // ハンバーガーメニューのアイコン
 const HamburgerIcon = () => (
@@ -45,6 +46,7 @@ export const Header = () => {
           <Link href="/illustrations" onClick={() => setIsOpen(false)}>Illustrations</Link>
           <Link href="/blog" onClick={() => setIsOpen(false)}>Blog</Link>
           <Link href="/contact" onClick={() => setIsOpen(false)}>Contact</Link>
+          <ThemeToggle />
         </nav>
       </div>
     </header>
