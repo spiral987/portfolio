@@ -11,9 +11,9 @@ type Props = {
 
 export const IllustrationGallery = ({ illustrations }: Props) => {
   const [activeYear, setActiveYear] = useState<number | null>(null);
-  const [isTimelineVisible, setIsTimelineVisible] = useState(true); //最初は表示
+  //const [isTimelineVisible, setIsTimelineVisible] = useState(true); //最初は表示
   const yearRefs = useRef<{ [key: number]: HTMLDivElement | null }>({});
-  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  //const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // イラストの年からユニークな年リストを作成し、降順にソート
   const years = useMemo(() => {
@@ -22,6 +22,7 @@ export const IllustrationGallery = ({ illustrations }: Props) => {
   }, [illustrations]);
 
 
+  /*
   // スクロール時にタイムラインを表示し、一定時間後に非表示にする
   useEffect(() => {
     const handleScroll = () => {
@@ -49,6 +50,7 @@ export const IllustrationGallery = ({ illustrations }: Props) => {
       clearTimeout(initialTimeout);
     };
   }, []);
+*/
 
   // スクロールを監視してactiveYearを更新するロジック
   useEffect(() => {
@@ -67,12 +69,15 @@ export const IllustrationGallery = ({ illustrations }: Props) => {
       }
     );
 
-    Object.values(yearRefs.current).forEach((ref) => {
+    // Copy the current refs to a local variable
+    const currentYearRefs = { ...yearRefs.current };
+
+    Object.values(currentYearRefs).forEach((ref) => {
       if (ref) observer.observe(ref);
     });
 
     return () => {
-      Object.values(yearRefs.current).forEach((ref) => {
+      Object.values(currentYearRefs).forEach((ref) => {
         if (ref) observer.unobserve(ref);
       });
     };

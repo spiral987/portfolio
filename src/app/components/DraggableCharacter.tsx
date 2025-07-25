@@ -24,8 +24,8 @@ export const DraggableCharacter = () => {
   const dragControls = useDragControls();
 
   // タイマーとアニメーションフレームの参照を保持
-  const actionTimeoutRef = useRef<NodeJS.Timeout>();
-  const animationFrameRef = useRef<number>();
+  const actionTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const animationFrameRef = useRef<number | null>(null);
 
   // キャラクターの「次の行動」をランダムに決定するロジック
   useEffect(() => {
@@ -85,7 +85,7 @@ export const DraggableCharacter = () => {
         x.set(currentX);
 
         // パラパラ漫画
-        setSpriteIndex(prev => (Math.floor(Date.now() / 200)) % walkingSprites.length);
+        setSpriteIndex((Math.floor(Date.now() / 200)) % walkingSprites.length);
         
         // 画面端での反転
         if (currentX > screenWidth / 2 - characterWidth / 2) {
