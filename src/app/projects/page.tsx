@@ -12,19 +12,21 @@ export default async function ProjectsPage() {
   const allProjects = await getAllProjectsUseCase.execute();
 
   return (
-    <div className="max-w-6xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700">
-        Projects
-      </h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {allProjects.length > 0 ? (
-          allProjects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))
-        ) : (
-          <p className="text-gray-500">まだ作品はありません。</p>
-        )}
+    <main>
+      <div className="max-w-6xl mx-auto">
+        <h1 className="text-3xl font-bold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700">
+          Projects
+        </h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {allProjects.length > 0 ? (
+            allProjects.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))
+          ) : (
+            <p className="text-gray-500">まだ作品はありません。</p>
+          )}
+        </div>
       </div>
-    </div>
+    </main>
   );
 }

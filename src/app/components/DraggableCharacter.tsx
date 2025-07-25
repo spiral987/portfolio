@@ -6,10 +6,10 @@ import Image from 'next/image';
 
 // キャラクターの画像を設定
 const walkingSprites = [
-  '/character.png', // 歩き画像1
-  '/cursor.png', // 歩き画像2
+  '/images/character.png', // 歩き画像1
+  '/images/cursor.png', // 歩き画像2
 ];
-const idleSprite = '/next.svg'; // 停止時の画像
+const idleSprite = '/images/next.svg'; // 停止時の画像
 
 export const DraggableCharacter = () => {
   // キャラクターの状態を管理
@@ -120,6 +120,7 @@ export const DraggableCharacter = () => {
   const currentSprite = (action === 'walking' && !isDragging) ? walkingSprites[spriteIndex] : idleSprite;
 
   return (
+    
     <motion.div
       drag
       dragControls={dragControls}
@@ -134,6 +135,7 @@ export const DraggableCharacter = () => {
         scaleX: direction === 'right' ? 1 : -1,
       }}
     >
+
       <Image
         src={currentSprite}
         alt="Walking Character"
@@ -142,6 +144,7 @@ export const DraggableCharacter = () => {
         priority
         className="pointer-events-none"
       />
+      <div>マスコットです</div>
     </motion.div>
   );
 };
