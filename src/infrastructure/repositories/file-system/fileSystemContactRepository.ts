@@ -16,6 +16,7 @@ type ContactFrontmatter = {
   githubUrl?: string | null;
   twitterUrl?: string | null;
   pixivUrl?: string | null; // PixivのURLを追加
+  skebUrl?: string | null;
 };
 
 const contactFilePath = path.join(process.cwd(), 'public/contact/index.md');
@@ -42,6 +43,7 @@ export class FileSystemContactRepository implements IContactRepository {
       githubUrl: data.githubUrl ? Url.create(data.githubUrl) : null,
       twitterUrl: data.twitterUrl ? Url.create(data.twitterUrl) : null,
       pixivUrl: data.pixivUrl ? Url.create(data.pixivUrl) : null, // PixivのURLを追加
+      skebUrl: data.skebUrl ? Url.create(data.skebUrl) : null,
     };
   }
 }

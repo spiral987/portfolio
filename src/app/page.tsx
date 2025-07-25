@@ -14,6 +14,9 @@ import { ProjectCard } from '@/app/components/ProjectCard';
 import { BlogPostCard } from '@/app/components/BlogPostCard';
 import { IllustrationCard } from './components/IllustrationCard';
 
+import Image from 'next/image';
+import { HeroHeader } from './components/HeroHeader';
+
 export default async function HomePage() {
   const projectRepository = new FileSystemProjectRepository();
   const illustrationRepository = new FileSystemIllustrationRepository();
@@ -31,65 +34,79 @@ export default async function HomePage() {
   const latestBlogPosts = await getLatestBlogPostsUseCase.execute(3); // 最新3件に
   const contactInfo = await getContactInfoUseCase.execute();
 
-  const bio = "spiralです。情報科学を専攻、ヒューマンコンピュータインタラクションを研究分野とし、個人ではアプリケーション制作やイラスト制作を行っています。ここには私の作品やブログ記事、連絡先情報などが掲載されています。";
+  const bio = "大学では情報科学を専攻、研究分野はHCIです。個人ではアプリケーション制作やイラスト制作を行っています。ぜひ私の作品をご覧ください。";
 
   return (
-    <div className="max-w-4xl mx-auto">
-      <h1 className ="text-4xl font-black tracking-wider mb-8 text-center">
-        spiral&#39;s Portfolio
-      </h1>
+    <>
+      <HeroHeader />
+      <main>
+        <div className="max-w-4xl mx-auto">
+          <section className="relative text-center my-12 rounded-xl">
+            <div className="absolute -top-40 left-1/2 -translate-x-1/2">
+              <Image
+                src="/images/icon.jpg"
+                alt="spiralのアイコン"
+                width={120}
+                height={120}
+                className="rounded-full"
+                priority
+              />
+            </div>
+          </section>
+          <section className="text-center rounded-xl">
+            <h1 className="text-4xl font-bold mb-4">spiraludon</h1>
+            <p className="text-lg leading-relaxed">{bio}</p>
+            <div className="mt-6 flex justify-center items-center gap-6 text-sm text-gray-500 dark:text-gray-400">
+              <a href={`mailto:${contactInfo.email.value}`} className="hover:text-blue-500 dark:hover:text-blue-400">
+                {contactInfo.email.value}
+              </a>
+              {contactInfo.githubUrl && (
+                <a href={contactInfo.githubUrl.value} target="_blank" rel="noopener noreferrer" className="hover:text-gray-800 dark:hover:text-gray-200">
+                  GitHub
+                </a>
+              )}
+            </div>
+          </section>
 
-      <section className="text-center my-12 p-8 rounded-xl">
-        <p className="text-lg leading-relaxed text-gray-800 dark:text-gray-200">{bio}</p>
-        <div className="mt-6 flex justify-center items-center gap-6 text-sm text-gray-500 dark:text-gray-400">
-          <a href={`mailto:${contactInfo.email.value}`} className="hover:text-blue-500 dark:hover:text-blue-400">
-            {contactInfo.email.value}
-          </a>
-          {contactInfo.githubUrl && (
-            <a href={contactInfo.githubUrl.value} target="_blank" rel="noopener noreferrer" className="hover:text-gray-800 dark:hover:text-gray-200">
-              GitHub
-            </a>
-          )}
-        </div>
-      </section>
+          {/* 注目作品セクション */}
+          <section className="mb-16">
+            <h2 className="text-3xl font-bold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700">
+              Featured
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {featuredProjects.length + featuredIllustrations.length> 0 ? (
+                featuredProjects.map((project) => (
+                  <ProjectCard key={project.id} project={project} />
+                ))
+                .concat(
+                  featuredIllustrations.map((illustration) => (
+                    <IllustrationCard key={illustration.id} illustration={illustration} />
+                  ))
+                )
+              ) : (
+                <p className="text-gray-500">まだ注目作品はありません。</p>
+              )}
+            </div>
+          </section>
 
-      {/* 注目作品セクション */}
-      <section className="mb-16">
-        <h2 className="text-3xl font-bold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700">
-          Featured
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredProjects.length + featuredIllustrations.length> 0 ? (
-            featuredProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
-            ))
-            .concat(
-              featuredIllustrations.map((illustration) => (
-                <IllustrationCard key={illustration.id} illustration={illustration} />
-              ))
-            )
-          ) : (
-            <p className="text-gray-500">まだ注目作品はありません。</p>
-          )}
+          {/* 最新ブログ記事セクション */}
+          <section>
+            <h2 className="text-3xl font-bold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700">
+              Posts
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {latestBlogPosts.length > 0 ? (
+                latestBlogPosts.map((post) => (
+                  <BlogPostCard key={post.id} post={post} />
+                ))
+              ) : (
+                <p className="text-gray-500">まだブログ記事はありません。</p>
+              )}
+            </div>
+          </section>
+          
         </div>
-      </section>
-
-      {/* 最新ブログ記事セクション */}
-      <section>
-        <h2 className="text-3xl font-bold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700">
-          Posts
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {latestBlogPosts.length > 0 ? (
-            latestBlogPosts.map((post) => (
-              <BlogPostCard key={post.id} post={post} />
-            ))
-          ) : (
-            <p className="text-gray-500">まだブログ記事はありません。</p>
-          )}
-        </div>
-      </section>
-      
-    </div>
+      </main>
+    </>
   );
 }

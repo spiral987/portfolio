@@ -13,6 +13,7 @@ export interface ContactInfo {
   githubUrl?: Url | null;       // GitHubプロフィールURL (Urlバリューオブジェクト, オプション)
   twitterUrl?: Url | null;      // Twitter/XプロフィールURL (Urlバリューオブジェクト, オプション)
   pixivUrl?: Url | null;        // PixivプロフィールURL (Urlバリューオブジェクト, オプション)
+  skebUrl?: Url | null;         // SkebプロフィールURL (Urlバリューオブジェクト, オプション)
 }
 
 /**
