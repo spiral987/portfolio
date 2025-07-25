@@ -5,7 +5,7 @@ import Link from 'next/link';
 export const IllustrationCard = ({ illustration }: { illustration: Illustration }) => (
   <Link 
     href={`/illustrations/${illustration.id}`} 
-    className="group block overflow-hidden"
+    className="group block overflow-hidden rounded-lg bg-white dark:bg-gray-800 shadow-lg transition-shadow duration-300 hover:shadow-lg"
     data-year={new Date(illustration.createdAt).getFullYear()}
   >
       {illustration.images.length > 0 && (

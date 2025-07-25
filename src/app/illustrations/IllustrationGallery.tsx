@@ -11,13 +11,44 @@ type Props = {
 
 export const IllustrationGallery = ({ illustrations }: Props) => {
   const [activeYear, setActiveYear] = useState<number | null>(null);
+  const [isTimelineVisible, setIsTimelineVisible] = useState(true); //最初は表示
   const yearRefs = useRef<{ [key: number]: HTMLDivElement | null }>({});
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // イラストの年からユニークな年リストを作成し、降順にソート
   const years = useMemo(() => {
     const uniqueYears = [...new Set(illustrations.map(i => new Date(i.createdAt).getFullYear()))];
     return uniqueYears.sort((a, b) => b - a);
   }, [illustrations]);
+
+
+  // スクロール時にタイムラインを表示し、一定時間後に非表示にする
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsTimelineVisible(true);
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+      scrollTimeoutRef.current = setTimeout(() => {
+        setIsTimelineVisible(false);
+      }, 1500); // 1.5秒間スクロールがなければ非表示にする
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    // ページ読み込み2秒後に一度非表示にする
+    const initialTimeout = setTimeout(() => {
+      setIsTimelineVisible(false);
+    }, 2000);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+      clearTimeout(initialTimeout);
+    };
+  }, []);
 
   // スクロールを監視してactiveYearを更新するロジック
   useEffect(() => {
@@ -54,31 +85,48 @@ export const IllustrationGallery = ({ illustrations }: Props) => {
     }
   }, [years, activeYear]);
 
-  let lastYear: number | null = null;
+  // 3列の配列を作成
+  const columns: Illustration[][] = [[], [], []];
+
+    // イラストを各列に順番に振り分ける
+  illustrations.forEach((illustration, index) => {
+    columns[index % 3].push(illustration);
+  });
 
   return (
-    <div className="relative">
-      <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-0">
-        {illustrations.map((illustration) => {
-          const year = new Date(illustration.createdAt).getFullYear();
-          const isFirstOfYear = year !== lastYear;
-          lastYear = year;
-          
-          return (
-            <div 
-              key={illustration.id} 
-              // 各年の最初のカードにアンカーを設置
-              id={isFirstOfYear ? `year-${year}` : undefined}
-              data-year-anchor={year}
-              ref={(el) => (yearRefs.current[year] = el)}
-              className="break-inside-avoid" // CSS columnsのバグを避けるための微調整
-            >
-              <IllustrationCard illustration={illustration} />
-            </div>
-          );
-        })}
+  <div className="relative">
+      <div className="flex gap-4">
+        {columns.map((column, colIndex) => (
+          <div key={colIndex} className="flex w-1/3 flex-col gap-4">
+            {column.map((illustration, index) => {
+               const year = new Date(illustration.createdAt).getFullYear();
+               // 各年の最初のイラストにだけアンカーを設置するためのロジック
+               const isFirstOfYear = !illustrations.slice(0, colIndex + (index * 3)).some(
+                 (prevIllu) => new Date(prevIllu.createdAt).getFullYear() === year
+               );
+
+              return(
+                <div
+                  key={illustration.id}
+                  id={isFirstOfYear ? `year-${year}` : undefined}
+                  data-year-anchor={year}
+                  ref={(el) => {
+                    if (isFirstOfYear) {
+                      yearRefs.current[year] = el;
+                    }
+                  }}
+                >
+                  <IllustrationCard illustration={illustration} />
+                </div>
+              );
+            })}
+          </div>
+        ))}
+        </div>
+      <div
+        className='fixed right-8 top-1/2 -translate-y-1/2 h-1/2 z-40 transition-opacity duration-300'>
+        <IllustrationTimeline years={years} activeYear={activeYear} />
       </div>
-      <IllustrationTimeline years={years} activeYear={activeYear} />
-    </div>
+      </div>
   );
 };

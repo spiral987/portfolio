@@ -7,7 +7,7 @@ type Props = {
 
 export const IllustrationTimeline = ({ years, activeYear }: Props) => {
   return (
-    <div className="fixed right-4 top-1/2 -translate-y-1/2 h-1/2 hidden lg:flex flex-col justify-between items-center z-40">
+    <div className="fixed h-full hidden lg:flex flex-col justify-between items-center">
       <div className="absolute top-0 left-1/2 -ml-[1px] h-full w-[2px] bg-gray-300 dark:bg-gray-700" />
       {years.map((year) => (
         <a

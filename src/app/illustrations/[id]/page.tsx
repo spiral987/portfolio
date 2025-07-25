@@ -32,13 +32,13 @@ export default async function IllustrationDetailPage({ params }: { params: Promi
     <article className="max-w-4xl mx-auto py-8">
       {/* メイン画像 */}
       {illustration.images.length > 0 && (
-        <div className="mb-8 rounded-lg overflow-hidden">
+        <div className="mb-8 flex h-[calc(100vh-50px)] items-center justify-center">
           <Image
             src={illustration.images[0].url.value}
             alt={illustration.images[0].altText}
             width={1200}
-            height={1200} // イラストは縦長の場合もあるので高さを調整
-            className="w-full h-auto object-contain"
+            height={1200}
+            className="max-h-full max-w-full rounded-lg object-contain"
             priority
           />
         </div>

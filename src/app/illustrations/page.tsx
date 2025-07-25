@@ -20,7 +20,7 @@ export default async function IllustrationsPage() {
       <h1 className="text-3xl font-bold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700">
         Illustrations
       </h1>
-      <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-0">
+      <div>
         {allIllustrations.length > 0 ? (
           <IllustrationGallery illustrations={plainIllustrations} />
         ) : (
