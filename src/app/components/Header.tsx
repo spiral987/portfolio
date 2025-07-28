@@ -4,6 +4,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { ThemeToggle } from './ThemeToggle';
+import { FaHome } from 'react-icons/fa';
 
 // ハンバーガーメニューのアイコン
 const HamburgerIcon = () => (
@@ -32,7 +33,7 @@ export const Header = () => {
     <header className="header">
       <div className="header-container">
         <Link href="/" className="logo">
-          Portfolio
+          <FaHome className="logo-icon" />
         </Link>
 
         {/* ハンバーガーメニューボタン (モバイル用) */}

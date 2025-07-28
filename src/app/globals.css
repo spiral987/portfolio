@@ -1,5 +1,10 @@
 @import "tailwindcss";
+@config "../../tailwind.config.ts";
 @plugin "@tailwindcss/typography";
+
+html {
+  scroll-behavior: smooth;
+}
 
 :root {
   --background: #ffffff;
@@ -15,8 +20,8 @@
 }
 
 :root.dark {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #000000;
+    --foreground: #c5c4c4;
 }
 
 
@@ -25,7 +30,7 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
-  padding-top: var(--header-height)
+  transition: background-color 0.1s ease-in-out, color 0.1s ease-in-out;
 }
 
 main {
@@ -43,6 +48,7 @@ main {
   z-index: 1000;
   display: flex;
   align-items: center;
+  transition: background-color 0.1s ease-in-out, color 0.1s ease-in-out;
 }
 
 .header-container {
@@ -57,17 +63,18 @@ main {
 
 .hero-header {
   position: relative;
-  width: 100%;
-  height: 100vh; /* ビューポートの高さの50%。お好みの高さに調整してください */
+  width: 100vw;
+  height: 100vh;
+  left: 50%;
+  margin-left: -50vw; /* 画面幅の半分を左にずらす */
   overflow: hidden;
-  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
 
   /* 背景画像として設定 */
-  background-image: url('/images/header-light.jpeg');
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 70%, var(--background)), url('/images/header-light.jpeg');
   background-attachment: fixed; /* 背景固定 */
   background-position: center 10%;
   background-repeat: no-repeat;
@@ -84,7 +91,7 @@ main {
   bottom: 0;
   
   /* ダークモード用の背景画像 */
-  background-image: url('/images/header-dark.jpg');
+  background-image: linear-gradient(to bottom, rgba(10, 10, 10, 0) 70%, var(--background)), url('/images/header-dark.jpg');
   background-attachment: fixed;
   background-position: center 10%;
   background-repeat: no-repeat;
@@ -92,8 +99,8 @@ main {
 
   /* 最初は透明にしておく */
   opacity: 0;
-  /* opacity の変化を0.5秒かけてアニメーションさせる */
-  transition: opacity 0.5s ease-in-out;
+  /* opacity の変化をアニメーションさせる */
+  transition: opacity 0.7s ease-in-out;
   /* z-index は hero-content より背後に配置されるように調整 */
   z-index: 0;
 }
@@ -161,6 +168,8 @@ main {
     display: block; /* 768px以下で表示 */
   }
 
+
+
   .nav-menu {
     position: fixed;
     top: 0;
@@ -178,7 +187,9 @@ main {
     left: 0; /* openクラスが付与されたら表示 */
   }
 
-    main {
+  main {
     padding: 1.5rem; /* 小さい画面では全体の余白を24pxに設定 */
   }
+
+
 }

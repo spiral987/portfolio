@@ -16,17 +16,19 @@ export default async function IllustrationsPage() {
   const plainIllustrations = JSON.parse(JSON.stringify(allIllustrations));
 
   return (
-    <div className="max-w-6xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700">
-        Illustrations
-      </h1>
-      <div>
-        {allIllustrations.length > 0 ? (
-          <IllustrationGallery illustrations={plainIllustrations} />
-        ) : (
-          <p className="text-gray-500">まだイラストはありません。</p>
-        )}
+    <main>
+      <div className="max-w-6xl mx-auto">
+        <h1 className="text-3xl font-bold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700">
+          Illustrations
+        </h1>
+        <div>
+          {allIllustrations.length > 0 ? (
+            <IllustrationGallery illustrations={plainIllustrations} />
+          ) : (
+            <p className="text-gray-500">まだイラストはありません。</p>
+          )}
+        </div>
       </div>
-    </div>
+    </main>
   );
 }

@@ -6,7 +6,7 @@ images:
   - url: '/images/projects/portfolio_image1.png'
     altText: 'ポートフォリオサイトのスクリーンショット1'
 techStack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Vercel']
-projectUrl: 'https://portfolio-spiral987-c31cbce1.vercel.app/'
+projectUrl: 'https://spiral987.vercel.app'
 githubUrl: 'https://github.com/spiral987/portfolio'
 isFeatured: false
 createdAt: '2025-07-04T00:00:00Z'
@@ -32,3 +32,6 @@ updatedAt: '2024-07-16T00:00:00Z'
 * SSRとSSGの違いを理解。今回はまだページが少ないので静的生成で落ち着いた。
 * Git Rebaseを初めてやってみた。コミット履歴が繋がってなかったからrebaseで履歴ごと改ざんした、というイメージでやったけど違うかもしれない。
 * Geminiは最新の情報を知らないので、エラーを吐いたらとりあえず使用しているものの最新の使い方を調べておくといい。
+
+## 今後
+* キャラを歩かせてみたい

@@ -52,9 +52,9 @@ export const ThemeToggle = () => {
             theme === 'dark' ? ' dark:bg-black' : ''
         }`}>
           {theme === 'dark' ? (
-            <FaMoon className="text-yellow-500" />
+            <FaMoon />
           ) : (
-            <FiSun className="text-gray-600" />
+            <FiSun />
           )}
         </span>
       </span>
