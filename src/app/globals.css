@@ -37,6 +37,10 @@ main {
     padding: 2rem 8rem;
 }
 
+#main-content {
+  scroll-margin-top: 12.5rem; /* 約200px */
+}
+
 /* Header Styles */
 .header {
   position: fixed; /* ヘッダーを画面上部に固定 */
