@@ -41,8 +41,8 @@ export default async function HomePage() {
       <HeroHeader />
       <main>
         <div className="max-w-4xl mx-auto">
-          <section className="relative text-center my-12 rounded-xl">
-            <div className="absolute -top-40 left-1/2 -translate-x-1/2">
+          <section id="main-content" className="relative text-center my-12 rounded-xl">
+            <div className="absolute -top-30 left-1/2 -translate-x-1/2">
               <Image
                 src="/images/icon.jpg"
                 alt="spiralのアイコン"
