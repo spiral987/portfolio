@@ -9,7 +9,6 @@ export const HeroHeader = () => {
         className="absolute bottom-10 right-1/32 -translate-x-1/2 z-10"
         aria-label="Scroll down to main content" 
       >
-        {/* Replace 'theme' with a default value or get it from context/hook */}
         <FaChevronDown className="text-6xl" />
       </a>
     </div>
