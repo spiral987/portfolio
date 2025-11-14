@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/app/components/Header";
 import { Footer } from "@/app/components/Footer";
-import { DraggableCharacter } from "@/app/components/DraggableCharacter";
+// import { DraggableCharacter } from "@/app/components/DraggableCharacter";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -60,7 +60,7 @@ export default function RootLayout({
       >
         <Header />
         {children}
-        <DraggableCharacter />
+        {/* <DraggableCharacter /> */}
         <Footer />
       </body>
     </html>

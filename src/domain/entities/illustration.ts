@@ -10,6 +10,7 @@ export interface Illustration{
     isFeatured: boolean; // トップページに表示するかどうか
     createdAt: Date;
     updatedAt: Date;
+    objectPosition?: string; // 画像の表示位置を指定するオプションプロパティ
 }
 
 export function isValidIllustration(illustration: Illustration): boolean {

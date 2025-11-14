@@ -25,6 +25,7 @@ type IllustrationFrontmatter = {
     type?: 'thumbnail' | 'full' | 'process' | 'screenshot';
     order?: number;
   }[];
+  objectPosition?: string;
 };
 
 const illustrationsDirectory = path.join(process.cwd(), 'public/illustrations');
@@ -53,6 +54,7 @@ export class FileSystemIllustrationRepository implements IIllustrationRepository
       createdAt: new Date(data.createdAt),
       updatedAt: new Date(data.updatedAt),
       images: data.images.map((img) => Image.create(img)),
+      objectPosition: data.objectPosition || undefined,
     };
   }
   
