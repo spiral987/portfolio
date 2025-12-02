@@ -29,9 +29,14 @@ import {
   SiExpress,
   SiGooglemaps,
   SiGooglegemini,
+  SiLeaflet,
+  SiFastapi,
+  SiSqlite,
+  SiFigma,
 } from 'react-icons/si';
 import{
   TbBrandCSharp,
+  TbZoom,
 } from 'react-icons/tb'
 
 // ビルド時に静的なパスを生成する
@@ -71,6 +76,11 @@ const techIconMap: { [key: string]: React.ElementType } = {
   Express: SiExpress,
   'Google Places API': SiGooglemaps,
   'C#': TbBrandCSharp,
+  'Leaflet': SiLeaflet,
+  'FastAPI': SiFastapi,
+  'SQLite': SiSqlite,
+  'OSMnx': TbZoom,
+  'Figma': SiFigma,
 };
 
 
@@ -133,7 +143,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
           <div className="flex gap-4">
             {project.projectUrl && (
               <a href={project.projectUrl.value} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
-                Webサイトを見る
+                サイトを見る
               </a>
             )}
             {project.githubUrl && (
