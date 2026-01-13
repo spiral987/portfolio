@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     title: "spiraludon's portfolio", // Twitter用のタイトル
     description: "アプリやイラストの情報がのっています", // Twitter用の説明
     creator: '@spiralneet', // あなたのXのユーザー名(@から始まる)に変更してください
-    images: ['/og-image.png'], // OGPと同じ画像を指定
+    images: ['/og-image.jpeg'], // OGPと同じ画像を指定
   },
 };
 
