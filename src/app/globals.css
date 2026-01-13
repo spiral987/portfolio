@@ -175,6 +175,19 @@ main {
 
 /* Responsive Styles for Mobile */
 @media (max-width: 768px) {
+  .hero-header {
+    /* スマホ用ライトモード画像 */
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 70%, var(--background)), url('/images/header-light-mobile.png');
+    /* 画像の位置調整（必要に応じて center top などに変えてください） */
+    background-position: center top;
+  }
+
+  .hero-header::after {
+    /* スマホ用ダークモード画像 */
+    background-image: linear-gradient(to bottom, rgba(10, 10, 10, 0) 70%, var(--background)), url('/images/header-dark-mobile.png');
+    background-position: center top;
+  }
+
   .hamburger-button {
     display: block;
     /* 768px以下で表示 */
