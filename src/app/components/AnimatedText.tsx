@@ -46,7 +46,7 @@ export const AnimatedText = () => {
 
   return (
     <h1
-      className="text-4xl md:text-6xl font-bold text-[#1ff1f] drop-shadow-m dark:text-[#cccccc] "
+      className="text-4xl md:text-6xl font-bold text-[#77aaee] drop-shadow-m dark:text-[#ffffcc]"
       style={{
         display: 'flex',
         justifyContent: 'center',
