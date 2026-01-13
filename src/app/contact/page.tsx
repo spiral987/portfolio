@@ -4,7 +4,6 @@ import { GetContactInfoUseCase } from '@/use-cases/contact/getContactInfoUseCase
 import { FileSystemContactRepository } from '@/infrastructure/repositories/file-system/fileSystemContactRepository';
 import { FaEnvelope, FaGithub, FaTwitter } from 'react-icons/fa';
 import { SiPixiv } from 'react-icons/si';
-import { SlNotebook } from 'react-icons/sl';
 
 export default async function ContactPage() {
   const contactRepository = new FileSystemContactRepository();

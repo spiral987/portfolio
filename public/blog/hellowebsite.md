@@ -8,4 +8,5 @@ tags: ['Next.js', 'React', 'TypeScript', 'Web開発', 'クリーンアーキテ�
 isDraft: false
 ---
 
-Next.jsを使って、自分のポートフォリオサイトを構築した。
+Next.jsを使って、自分のポートフォリオサイトを構築した。フロントエンド開発としては良い感じに勉強できた。
+https://spiral987.vercel.app/projects/5
