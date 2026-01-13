@@ -25,13 +25,13 @@ export const metadata: Metadata = {
     title: "spiraludon's portfolio", // OGP用のタイトル
     description: "アプリやイラストの情報がのっています", // OGP用の説明
     url: 'https://spiral987.vercel.app', // ★ あなたのサイトのURLに必ず変更してください
-    siteName: "spiraludon's Portfolio",
+    siteName: "spiraludon",
     images: [
       {
         url: '/og-image.png', // publicフォルダに置いた画像へのパス
         width: 1200,
         height: 630,
-        alt: "spiral's Portfolio Site",
+        alt: "Portfolio Site",
       },
     ],
     locale: 'ja_JP',
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image', // 大きな画像付きのカードタイプ
     title: "spiraludon's portfolio", // Twitter用のタイトル
     description: "アプリやイラストの情報がのっています", // Twitter用の説明
-    creator: '@spiralneet', // ★ あなたのXのユーザー名(@から始まる)に変更してください
+    creator: '@spiralneet', // あなたのXのユーザー名(@から始まる)に変更してください
     images: ['/og-image.png'], // OGPと同じ画像を指定
   },
 };

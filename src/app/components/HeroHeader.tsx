@@ -20,11 +20,11 @@ export const HeroHeader = ({ children }: Props) => {
 
       <a
         href="#main-content"
-        className="absolute bottom-10 right-1/32 -translate-x-1/2 z-10"
-        aria-label="Scroll down to main content" 
+        className="absolute bottom-10 right-1/32 -translate-x-1/2 z-10 m-10"
+        aria-label="Scroll down to main content"
       >
         {/* ★ アイコンの色も背景に埋もれないよう白に変更します */}
-        <FaChevronDown className="text-6xl text-white opacity-70" />
+        <FaChevronDown className="text-6xl text-black dark:text-white opacity-70" />
       </a>
     </div>
   );

@@ -11,7 +11,7 @@ export default async function ContactPage() {
   const getContactInfoUseCase = new GetContactInfoUseCase(contactRepository);
   const contactInfo = await getContactInfoUseCase.execute();
 
-   return (
+  return (
     <main>
       <div className="max-w-2xl mx-auto py-8">
         <h1 className="text-3xl font-bold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700">
@@ -60,15 +60,6 @@ export default async function ContactPage() {
               </div>
             )}
 
-            {/* Skeb */}
-            {contactInfo.skebUrl && (
-              <div className="flex items-center gap-4">
-                <SlNotebook className="text-2xl text-gray-600 dark:text-gray-400" />
-                <a href={contactInfo.skebUrl.value} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
-                  {contactInfo.skebUrl.value}
-                </a>
-              </div>
-            )}
           </div>
         </div>
       </div>
