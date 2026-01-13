@@ -44,7 +44,7 @@ export default async function HomePage() {
   const latestBlogPosts = await getLatestBlogPostsUseCase.execute(3);
   const contactInfo = await getContactInfoUseCase.execute();
 
-  const bio = "大学では情報科学を専攻、研究分野はHCIです。現在は修論テーマを考えたりイラスト描いたりしてます。";
+  const bio = "大学では情報科学を専攻、研究分野はHCIです。イラストレーターの創作支援に関する研究をしたいと考えています。現在は修論テーマを模索したりイラスト描いたりしてます。";
 
   return (
     <>

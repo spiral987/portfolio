@@ -1,5 +1,5 @@
 // src/app/components/AnimatedText.tsx
-'use client'; 
+'use client';
 
 import { useEffect, useRef } from 'react';
 import Typed from 'typed.js'; // 'typed.js' をインポート
@@ -26,15 +26,15 @@ export const AnimatedText = () => {
         backSpeed: 30,   // バックスペースの速さ
 
         backDelay: 1500,
-        
+
         loop: true,     // ループを有効に
-        
+
         // ★ 2. smartBackspace: false にします
         // (次の文字列との共通部分を残さない設定)
-        smartBackspace: false, 
+        smartBackspace: false,
 
-        showCursor: true, 
-        cursorChar: '|', 
+        showCursor: true,
+        cursorChar: '|',
       });
 
       // コンポーネントがアンマウントされる時にインスタンスを破棄
@@ -45,10 +45,10 @@ export const AnimatedText = () => {
   }, []); // 空の配列[]で、マウント時に1回だけ実行
 
   return (
-    <h1 
-      className="text-6xl font-bold text-black drop-shadow-m dark:text-white "
-      style={{ 
-        display: 'flex', 
+    <h1
+      className="text-4xl md:text-6xl font-bold text-[#1ff1f] drop-shadow-m dark:text-[#cccccc] "
+      style={{
+        display: 'flex',
         justifyContent: 'center',
         // ★ 複数行になっても中央揃えになるように高さを確保
         minHeight: '7.5rem', // text-6xl (3.75rem) の約2行分
@@ -61,7 +61,7 @@ export const AnimatedText = () => {
       <div>
         {/* whiteSpace: 'pre' で "I'm " の後のスペースが維持されるようにします */}
         <span style={{ whiteSpace: 'pre' }}>Hi, I&apos;m </span>
-        
+
         {/* Typed.js はこの span の中身だけを書き換えます */}
         <span ref={el} />
       </div>

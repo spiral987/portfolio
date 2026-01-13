@@ -72,8 +72,6 @@ main {
   position: relative;
   width: 100%;
   height: 100vh;
-  left: 50%;
-  margin-left: -50vw;
   /* 画面幅の半分を左にずらす */
   overflow: hidden;
   display: flex;
