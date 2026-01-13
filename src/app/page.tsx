@@ -35,11 +35,11 @@ export default async function HomePage() {
 
   const allProjects = await getAllProjectsUseCase.execute();
   const allIllustrations = await getAllIllustrationsUseCase.execute();
-  
+
   // ★ 取得した全イラストから、最新の12件だけをスライスします
   const latestIllustrations = allIllustrations.slice(0, 12);
 
-  const latestBlogPosts = await getLatestBlogPostsUseCase.execute(3); 
+  const latestBlogPosts = await getLatestBlogPostsUseCase.execute(3);
   const contactInfo = await getContactInfoUseCase.execute();
 
   const bio = "大学では情報科学を専攻、研究分野はHCIです。現在は修論テーマを考えたりイラスト描いたりしてます。";
@@ -51,13 +51,13 @@ export default async function HomePage() {
       </HeroHeader>
       <main>
         <div className="max-w-6xl mx-auto">
-          
+
           {/* ... (自己紹介セクション) ... */}
           <section id="main-content" className="relative text-center my-12 rounded-xl">
             <div className="absolute -top-30 left-1/2 -translate-x-1/2">
               <Image
                 src="/images/icon.jpg"
-                alt="spiralのアイコン"
+                alt="spiralIcon"
                 width={120}
                 height={120}
                 className="rounded-full"
@@ -65,17 +65,17 @@ export default async function HomePage() {
               />
             </div>
           </section>
-         <section className="text-center rounded-xl">
+          <section className="text-center rounded-xl">
             <h1 className="text-4xl font-bold mb-4 mt-16 text-gray-900 dark:text-gray-100">
               spiraludon
             </h1>
             <p className="text-lg leading-relaxed">{bio}</p>
-            
+
             {/* ↓ 既存の div をアイコンリンクの div に置き換えます */}
             <div className="mt-6 flex justify-center items-center gap-6 text-2xl text-gray-500 dark:text-gray-400">
               {/* Email */}
-              <a 
-                href={`mailto:${contactInfo.email.value}`} 
+              <a
+                href={`mailto:${contactInfo.email.value}`}
                 aria-label="Email"
                 className="hover:text-blue-500 dark:hover:text-blue-400 transition-colors"
               >
@@ -84,10 +84,10 @@ export default async function HomePage() {
 
               {/* GitHub */}
               {contactInfo.githubUrl && (
-                <a 
-                  href={contactInfo.githubUrl.value} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+                <a
+                  href={contactInfo.githubUrl.value}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label="GitHub"
                   className="hover:text-gray-800 dark:hover:text-gray-200 transition-colors"
                 >
@@ -97,10 +97,10 @@ export default async function HomePage() {
 
               {/* Twitter/X */}
               {contactInfo.twitterUrl && (
-                <a 
-                  href={contactInfo.twitterUrl.value} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+                <a
+                  href={contactInfo.twitterUrl.value}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label="Twitter"
                   className="hover:text-blue-500 dark:hover:text-blue-400 transition-colors"
                 >
@@ -110,10 +110,10 @@ export default async function HomePage() {
 
               {/* Pixiv */}
               {contactInfo.pixivUrl && (
-                <a 
-                  href={contactInfo.pixivUrl.value} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+                <a
+                  href={contactInfo.pixivUrl.value}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label="Pixiv"
                   className="hover:text-blue-500 dark:hover:text-blue-400 transition-colors"
                 >
@@ -148,12 +148,12 @@ export default async function HomePage() {
               {/* ★ allIllustrations を latestIllustrations に変更 */}
               {latestIllustrations.length > 0 ? (
                 latestIllustrations.map((illustration) => (
-                    <IllustrationCard 
-                      key={illustration.id} 
-                      illustration={illustration} 
-                      isHomePage={true} 
-                    />
-                  ))
+                  <IllustrationCard
+                    key={illustration.id}
+                    illustration={illustration}
+                    isHomePage={true}
+                  />
+                ))
               ) : (
                 <p className="text-gray-500">まだイラストはありません。</p>
               )}
@@ -163,8 +163,8 @@ export default async function HomePage() {
             {/* 取得したイラストの総数が12件より多い場合のみ "More" ボタンを表示 */}
             {allIllustrations.length > 12 && (
               <div className="text-center mt-8">
-                <Link 
-                  href="/illustrations" 
+                <Link
+                  href="/illustrations"
                   className="inline-block bg-gray-100 dark:bg-zinc-800 text-gray-700 dark:text-gray-300 font-semibold py-2 px-6 rounded-lg shadow-md hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors"
                 >
                   More
@@ -175,7 +175,7 @@ export default async function HomePage() {
 
 
           {/* Posts セクション */}
-<section>
+          <section>
             <h2 className="text-3xl font-bold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700">
               Posts
             </h2>
@@ -193,7 +193,7 @@ export default async function HomePage() {
               </div>
             </div>
           </section>
-          
+
         </div>
       </main>
     </>
