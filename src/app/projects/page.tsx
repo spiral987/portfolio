@@ -13,7 +13,7 @@ export default async function ProjectsPage() {
 
   return (
     <main>
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-6xl mx-auto py-8">
         <h1 className="text-3xl font-bold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700">
           Projects
         </h1>

@@ -38,6 +38,8 @@ export default async function HomePage() {
 
   // ★ 取得した全イラストから、最新の12件だけをスライスします
   const latestIllustrations = allIllustrations.slice(0, 12);
+  // ★ Projectsについても最新の3件だけを表示するようにします
+  const latestProjects = allProjects.slice(0, 3);
 
   const latestBlogPosts = await getLatestBlogPostsUseCase.execute(3);
   const contactInfo = await getContactInfoUseCase.execute();
@@ -128,15 +130,27 @@ export default async function HomePage() {
             <h2 className="text-3xl font-bold mb-6 pb-2 border-b-2 border-gray-200 dark:border-gray-700">
               Projects
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {allProjects.length > 0 ? (
-                allProjects.map((project) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
+              {latestProjects.length > 0 ? (
+                latestProjects.map((project) => (
                   <ProjectCard key={project.id} project={project} />
                 ))
               ) : (
                 <p className="text-gray-500">まだ作品はありません。</p>
               )}
             </div>
+
+            {/* Total projects check for More button */}
+            {allProjects.length > 3 && (
+              <div className="text-center mt-8">
+                <Link
+                  href="/projects"
+                  className="inline-block bg-gray-100 dark:bg-zinc-800 text-gray-700 dark:text-gray-300 font-semibold py-2 px-6 rounded-lg shadow-md hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors"
+                >
+                  More
+                </Link>
+              </div>
+            )}
           </section>
 
           {/* Illustrations セクション */}

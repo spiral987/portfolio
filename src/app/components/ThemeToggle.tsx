@@ -35,22 +35,19 @@ export const ThemeToggle = () => {
     setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
   };
 
- return (
+  return (
     <button
       onClick={toggleTheme}
-      className={`relative inline-flex items-center h-7 w-12 rounded-full transition-colors duration-300 border-2 ${
-        theme === 'dark' ? 'bg-black' : 'bg-white'
-      }`}
+      className={`relative inline-flex items-center h-7 w-12 rounded-full transition-colors duration-300 border-2 ${theme === 'dark' ? 'bg-[#1a1a1a]' : 'bg-white'
+        }`}
       aria-label="Toggle theme"
     >
       <span
-        className={`absolute inset-y-0 left-0 flex items-center justify-center h-full w-7 transition-transform duration-300 transform ${
-          theme === 'dark' ? 'translate-x-5' : 'translate-x-0'
-        }`}
+        className={`absolute inset-y-0 left-0 flex items-center justify-center h-full w-7 transition-transform duration-300 transform ${theme === 'dark' ? 'translate-x-5' : 'translate-x-0'
+          }`}
       >
-        <span className={`inline-flex items-center justify-center h-5 w-5 rounded-full bg-white${
-            theme === 'dark' ? ' dark:bg-black' : ''
-        }`}>
+        <span className={`inline-flex items-center justify-center h-5 w-5 rounded-full bg-white${theme === 'dark' ? ' dark:bg-[#1a1a1a]' : ''
+          }`}>
           {theme === 'dark' ? (
             <FaMoon />
           ) : (
