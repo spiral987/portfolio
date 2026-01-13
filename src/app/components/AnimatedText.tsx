@@ -46,7 +46,7 @@ export const AnimatedText = () => {
 
   return (
     <h1
-      className="text-4xl md:text-6xl font-bold  drop-shadow-md"
+      className="text-4xl md:text-6xl font-bold text-[#1f1f1f] drop-shadow-m dark:text-[#ffffff]"
       style={{
         display: 'flex',
         justifyContent: 'center',
@@ -54,10 +54,10 @@ export const AnimatedText = () => {
         minHeight: '7.5rem', // text-6xl (3.75rem) の約2行分
         // ★ テキストが折り返した場合も中央揃えにする
         textAlign: 'center',
-        color: '#ffffff',
-        mixBlendMode: 'difference',
       }}
     >
+      {/* ★ 3. "Hi, I'm " を静的に表示し、
+             Typed.jsが動作する <span> と分離します */}
       <div>
         {/* whiteSpace: 'pre' で "I'm " の後のスペースが維持されるようにします */}
         <span style={{ whiteSpace: 'pre' }}>Hi, I&apos;m </span>
